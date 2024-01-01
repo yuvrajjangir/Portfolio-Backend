@@ -1,13 +1,11 @@
-const express = require("express");
-const model = require("../Model/contact.model");
-const router = express.Router();
+const {Router} = require("express");
+const { Contact } = require("../Model/contact.model");
+const contactController = Router();
 
-
-router.post('/submit-contact', async (req, res) => {
+contactController.post('/submit-contact', async (req, res) => {
     try {
       const { name, email, phone, message } = req.body;
-      const newContact = new model({ name, email, phone, message });
-      await newContact.save();
+      await Contact.create({name, email, phone, message})
       res.status(200).json({ message: 'Contact information saved successfully!' });
     } catch (error) {
       res.status(500).json({ error: 'Error saving contact information' });
@@ -15,4 +13,4 @@ router.post('/submit-contact', async (req, res) => {
     }
   });
 
-  module.exports = router;
+  module.exports = {contactController};

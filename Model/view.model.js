@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
 const viewsSchema = new mongoose.Schema({
-    ip: { type: String, required: true },
-    count: { type: Number, default: 0 },
-    visited: { type: Boolean, default: false }
+    count: { type: Number, default: 0 }
 });
 
 const Views = mongoose.model('Views', viewsSchema);

@@ -3,8 +3,11 @@ const { Views } = require("../Model/view.model");
 const useragent = require('useragent');
 const viewsController = Router();
 
-// Utility to get IP address
-const getIpAddress = (req) => req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+// Utility to get the first IP address
+const getIpAddress = (req) => {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    return ip.includes(',') ? ip.split(',')[0].trim() : ip;  // Take only the first IP
+};
 
 // Utility to parse device information from user-agent
 const getDeviceInfo = (req) => {
@@ -20,8 +23,11 @@ const getDeviceInfo = (req) => {
 // Add IP and device info when user visits the portfolio
 viewsController.post('/views', async (req, res) => {
     try {
-        const userIp = getIpAddress(req);
+        const userIp = getIpAddress(req);  // Now getting only the first IP
         const deviceInfo = getDeviceInfo(req);
+
+        console.log('User IP:', userIp);     
+        console.log('Device Info:', deviceInfo); 
 
         let views = await Views.findOne();
         if (!views) {
@@ -61,3 +67,4 @@ viewsController.get('/views', async (req, res) => {
 });
 
 module.exports = { viewsController };
+

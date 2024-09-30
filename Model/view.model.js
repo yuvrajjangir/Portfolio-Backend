@@ -5,12 +5,11 @@ const viewSchema = new mongoose.Schema({
     visitors: [
         {
             ip: { type: String, required: true },
-            device: { type: String, required: true },
-            timestamp: { type: Date, default: Date.now }
+            device: { type: String, required: true }
         }
     ]
 });
 
-const Views = mongoose.model("Views", viewSchema);  // Make sure the collection is named correctly
+const Views = mongoose.model("Views", viewSchema);
 
 module.exports = { Views };

@@ -1,8 +1,7 @@
  const { Router } = require("express");
  const { Views } = require("../Model/view.model");
  const axios = require('axios');
- const userAgent = require('express-useragent');  // Import
-express-useragent for local parsing
+ const userAgent = require('express-useragent');
  const viewsController = Router();
  
  // Middleware to parse user-agent

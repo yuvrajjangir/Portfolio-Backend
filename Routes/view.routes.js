@@ -15,7 +15,7 @@ const getIpAddress = (req) => {
 
 // Combine Userstack API with fallback to express-useragent
 const getDeviceInfo = async (req) => {
-  const apiKey = "YOUR_USERSTACK_API_KEY"; // Replace with your Userstack API key
+  const apiKey = process.env.ACCESS_KEY; // Replace with your Userstack API key
   const userAgentString = req.headers["user-agent"];
   let deviceInfo = "Unknown Device";
 
